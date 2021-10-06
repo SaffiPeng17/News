@@ -1,0 +1,38 @@
+# commit log please follow the following format
+#
+# <type>(<scope>): <subject>
+#
+# <body> (optional)
+#
+# <footer> (optional)
+#
+# Example:
+# feat: implementation login api function
+#
+# finished login module and integration with server login api
+#
+# Closes Jira#xxxx
+#
+# <type>
+# feat: new feature
+# fix: Bug fix
+# docs: Change document
+# style: coding style change
+# refactor: function modularize
+# perf: performance optimize
+# test: add unit test code
+# build: build config change
+# ci: configuration ci setting
+# add: add files not related with functionality
+# 3rd: 3rd party library
+
+# chore: updating grunt tasks etc; no production code change
+#
+# <Subject>
+# Summarize the change
+#
+# <Body>
+# Specific change detail
+#
+# <Footer>
+#  Issue # or Bug#. ex: Jira#377
