@@ -2,34 +2,14 @@ project 'News.xcodeproj'
 platform :ios, '10.0'
 use_frameworks!
 
-def network
+target "News" do
+  pod 'SnapKit'
   pod 'Moya', '~> 15.0'
-end
-
-def rx
   pod 'RxSwift'
   pod 'RxCocoa'
-end
-
-def layout
-  pod 'SnapKit'
-end
-
-def database
   pod 'RealmSwift'
+  pod 'Kingfisher'
 end
-
-def common_library
-  network
-  rx
-  layout
-  database
-end
-
-target "News" do
-  common_library
-end
-
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|
