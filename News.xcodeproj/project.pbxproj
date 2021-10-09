@@ -16,6 +16,12 @@
 		049B9940270DF51300400C09 /* NewsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B993F270DF51300400C09 /* NewsUITestsLaunchTests.swift */; };
 		04EC05E5270F69B900F65F26 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC05E4270F69B900F65F26 /* UIColor+Hex.swift */; };
 		04EC05EE270F6BE300F65F26 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC05ED270F6BE300F65F26 /* MainViewController.swift */; };
+		04EC05F42711AB1E00F65F26 /* MainViewControllerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC05F32711AB1E00F65F26 /* MainViewControllerVM.swift */; };
+		04EC05F62711AB4F00F65F26 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC05F52711AB4F00F65F26 /* NewsCell.swift */; };
+		04EC05F82711AB5F00F65F26 /* NewsCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC05F72711AB5F00F65F26 /* NewsCellVM.swift */; };
+		04EC05FB2711B14500F65F26 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC05FA2711B14500F65F26 /* BaseTableViewCell.swift */; };
+		04EC05FD2711B1DA00F65F26 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC05FC2711B1DA00F65F26 /* BaseViewModel.swift */; };
+		04EC06012711B8F400F65F26 /* DataAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC06002711B8F400F65F26 /* DataAccessManager.swift */; };
 		33419BC9DFBE5C10F1AE937D /* Pods_News.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF883B25A4805E52DBFD4CD /* Pods_News.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +56,12 @@
 		049B993F270DF51300400C09 /* NewsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		04EC05E4270F69B900F65F26 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		04EC05ED270F6BE300F65F26 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		04EC05F32711AB1E00F65F26 /* MainViewControllerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerVM.swift; sourceTree = "<group>"; };
+		04EC05F52711AB4F00F65F26 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		04EC05F72711AB5F00F65F26 /* NewsCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellVM.swift; sourceTree = "<group>"; };
+		04EC05FA2711B14500F65F26 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		04EC05FC2711B1DA00F65F26 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		04EC06002711B8F400F65F26 /* DataAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAccessManager.swift; sourceTree = "<group>"; };
 		067BA8B5C2BFAA87205D800C /* Pods-News.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News.debug.xcconfig"; path = "Target Support Files/Pods-News/Pods-News.debug.xcconfig"; sourceTree = "<group>"; };
 		A6543F432CE2EAFF8E810B73 /* Pods-News.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News.release.xcconfig"; path = "Target Support Files/Pods-News/Pods-News.release.xcconfig"; sourceTree = "<group>"; };
 		DDF883B25A4805E52DBFD4CD /* Pods_News.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_News.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +122,7 @@
 				04EC05E3270F699A00F65F26 /* Extensions */,
 				04EC05F1270F6C1800F65F26 /* Network */,
 				04EC05F0270F6C1000F65F26 /* Database */,
+				04EC05F92711B0E800F65F26 /* BaseViews */,
 				04EC05EF270F6BF300F65F26 /* ViewControllers */,
 				04EC05E2270F529F00F65F26 /* Storyboards */,
 				049B9925270DF51300400C09 /* Assets.xcassets */,
@@ -156,6 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				04EC05ED270F6BE300F65F26 /* MainViewController.swift */,
+				04EC05F32711AB1E00F65F26 /* MainViewControllerVM.swift */,
+				04EC05F22711AAC700F65F26 /* Cells */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -163,6 +178,7 @@
 		04EC05F0270F6C1000F65F26 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				04EC06002711B8F400F65F26 /* DataAccessManager.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -172,6 +188,24 @@
 			children = (
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		04EC05F22711AAC700F65F26 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				04EC05F52711AB4F00F65F26 /* NewsCell.swift */,
+				04EC05F72711AB5F00F65F26 /* NewsCellVM.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		04EC05F92711B0E800F65F26 /* BaseViews */ = {
+			isa = PBXGroup;
+			children = (
+				04EC05FA2711B14500F65F26 /* BaseTableViewCell.swift */,
+				04EC05FC2711B1DA00F65F26 /* BaseViewModel.swift */,
+			);
+			path = BaseViews;
 			sourceTree = "<group>";
 		};
 		99A3182FC631B6380E05FD28 /* Pods */ = {
@@ -366,9 +400,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04EC05F42711AB1E00F65F26 /* MainViewControllerVM.swift in Sources */,
 				04EC05EE270F6BE300F65F26 /* MainViewController.swift in Sources */,
+				04EC06012711B8F400F65F26 /* DataAccessManager.swift in Sources */,
 				04EC05E5270F69B900F65F26 /* UIColor+Hex.swift in Sources */,
+				04EC05F82711AB5F00F65F26 /* NewsCellVM.swift in Sources */,
+				04EC05FB2711B14500F65F26 /* BaseTableViewCell.swift in Sources */,
+				04EC05FD2711B1DA00F65F26 /* BaseViewModel.swift in Sources */,
 				049B991D270DF51200400C09 /* AppDelegate.swift in Sources */,
+				04EC05F62711AB4F00F65F26 /* NewsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
