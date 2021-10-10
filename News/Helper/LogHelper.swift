@@ -14,6 +14,7 @@ class LogHelper: NSObject {
         case api
         case database
         case `deinit`
+        case download
         case thread
 
         var prefix: String {

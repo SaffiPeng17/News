@@ -27,13 +27,13 @@ struct TopHeadLinesModel: Codable {
 
 struct Article: Codable {
     let source: Source
-    let author: String?
+    let author: String
     let title: String
-    let description: String?
+    let description: String
     let url: String
-    let urlToImage: String?
+    let urlToImage: String
     let publishedAt: String
-    let content: String?
+    let content: String
     
     enum CodingKeys: String, CodingKey {
         case source, author, title, description, url, urlToImage, publishedAt, content
@@ -43,18 +43,18 @@ struct Article: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 
         source = try values.decode(Source.self, forKey: .source)
-        author = try values.decodeIfPresent(String.self, forKey: .author)
+        author = try values.decodeIfPresent(String.self, forKey: .author) ?? ""
         title = try values.decode(String.self, forKey: .title)
-        description = try values.decodeIfPresent(String.self, forKey: .description)
+        description = try values.decodeIfPresent(String.self, forKey: .description) ?? ""
         url = try values.decode(String.self, forKey: .url)
-        urlToImage = try values.decodeIfPresent(String.self, forKey: .urlToImage)
+        urlToImage = try values.decodeIfPresent(String.self, forKey: .urlToImage) ?? ""
         publishedAt = try values.decode(String.self, forKey: .publishedAt)
-        content = try values.decodeIfPresent(String.self, forKey: .content)
+        content = try values.decodeIfPresent(String.self, forKey: .content) ?? ""
     }
 }
 
 struct Source: Codable {
-    let id: String?
+    let id: String
     let name: String
 
     enum CodingKeys: String, CodingKey {
@@ -64,7 +64,7 @@ struct Source: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 
-        id = try values.decodeIfPresent(String.self, forKey: .id)
+        id = try values.decodeIfPresent(String.self, forKey: .id) ?? ""
         name = try values.decode(String.self, forKey: .name)
     }
 }

@@ -11,12 +11,7 @@ import RxCocoa
 
 protocol CellViewModelProtocol {
     var cellIdentifier: String { get }
-    func updateContent(with model: NewsCellModel)
-}
-
-struct NewsCellModel {
-    var image: UIImage?
-    var title: String
+    func updateContent(with model: Article)
 }
 
 class NewsCellVM: BaseViewModel, CellViewModelProtocol {
@@ -26,16 +21,16 @@ class NewsCellVM: BaseViewModel, CellViewModelProtocol {
     let image: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
     let title: BehaviorRelay<String> = BehaviorRelay(value: "")
     
-    private(set) var newsModel: NewsCellModel?
+    private(set) var article: Article?
 
-    init(with model: NewsCellModel) {
+    init(with model: Article) {
         super.init()
-        self.newsModel = model
+        self.article = model
         self.updateContent(with: model)
     }
     
-    func updateContent(with model: NewsCellModel) {
-        self.image.accept(model.image)
+    func updateContent(with model: Article) {
+//        self.image.accept(model.image)
         self.title.accept(model.title)
     }
 }

@@ -8,10 +8,6 @@
 import Foundation
 import Moya
 
-enum ApiConfig: String {
-    case key = "b8f691387be74d76998f8b109a201f09"
-}
-
 enum ApiService {
     case topHeadLines(country: String)
 }
@@ -39,7 +35,7 @@ extension ApiService: TargetType {
     var task: Task {
         switch self {
         case .topHeadLines(let country):
-            return .requestParameters(parameters: ["country": country, "apiKey": ApiConfig.key.rawValue],
+            return .requestParameters(parameters: ["country": country, "apiKey": AppConfig.API.key],
                                       encoding: URLEncoding.queryString)
         }
     }

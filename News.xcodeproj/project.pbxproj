@@ -23,9 +23,12 @@
 		04EC05FD2711B1DA00F65F26 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC05FC2711B1DA00F65F26 /* BaseViewModel.swift */; };
 		04EC06012711B8F400F65F26 /* DataAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC06002711B8F400F65F26 /* DataAccessManager.swift */; };
 		04EC06052712896300F65F26 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC06042712896300F65F26 /* ApiService.swift */; };
-		04EC06072712897700F65F26 /* RealmDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC06062712897700F65F26 /* RealmDAO.swift */; };
+		04EC06072712897700F65F26 /* RLMTopHeadArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC06062712897700F65F26 /* RLMTopHeadArticle.swift */; };
 		04EC060C27128D5100F65F26 /* LogHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC060B27128D5100F65F26 /* LogHelper.swift */; };
 		04EC06102712E86B00F65F26 /* TopHeadLinesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC060F2712E86B00F65F26 /* TopHeadLinesModel.swift */; };
+		04F854A0271349FF0080A193 /* Realm+migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8549F271349FF0080A193 /* Realm+migration.swift */; };
+		04F854A227134A9B0080A193 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F854A127134A9B0080A193 /* AppConfig.swift */; };
+		04F854A4271355F70080A193 /* RealmDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F854A3271355F70080A193 /* RealmDAO.swift */; };
 		33419BC9DFBE5C10F1AE937D /* Pods_News.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF883B25A4805E52DBFD4CD /* Pods_News.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,9 +70,12 @@
 		04EC05FC2711B1DA00F65F26 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		04EC06002711B8F400F65F26 /* DataAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAccessManager.swift; sourceTree = "<group>"; };
 		04EC06042712896300F65F26 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
-		04EC06062712897700F65F26 /* RealmDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDAO.swift; sourceTree = "<group>"; };
+		04EC06062712897700F65F26 /* RLMTopHeadArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLMTopHeadArticle.swift; sourceTree = "<group>"; };
 		04EC060B27128D5100F65F26 /* LogHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHelper.swift; sourceTree = "<group>"; };
 		04EC060F2712E86B00F65F26 /* TopHeadLinesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeadLinesModel.swift; sourceTree = "<group>"; };
+		04F8549F271349FF0080A193 /* Realm+migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+migration.swift"; sourceTree = "<group>"; };
+		04F854A127134A9B0080A193 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		04F854A3271355F70080A193 /* RealmDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDAO.swift; sourceTree = "<group>"; };
 		067BA8B5C2BFAA87205D800C /* Pods-News.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News.debug.xcconfig"; path = "Target Support Files/Pods-News/Pods-News.debug.xcconfig"; sourceTree = "<group>"; };
 		A6543F432CE2EAFF8E810B73 /* Pods-News.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News.release.xcconfig"; path = "Target Support Files/Pods-News/Pods-News.release.xcconfig"; sourceTree = "<group>"; };
 		DDF883B25A4805E52DBFD4CD /* Pods_News.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_News.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,11 +133,13 @@
 			isa = PBXGroup;
 			children = (
 				049B991C270DF51200400C09 /* AppDelegate.swift */,
+				04F854A127134A9B0080A193 /* AppConfig.swift */,
+				04EC06002711B8F400F65F26 /* DataAccessManager.swift */,
 				04EC05E3270F699A00F65F26 /* Extensions */,
 				04EC060A27128D3D00F65F26 /* Helper */,
+				04EC05F92711B0E800F65F26 /* BaseViews */,
 				04EC05F1270F6C1800F65F26 /* Network */,
 				04EC05F0270F6C1000F65F26 /* Database */,
-				04EC05F92711B0E800F65F26 /* BaseViews */,
 				04EC05EF270F6BF300F65F26 /* ViewControllers */,
 				04EC05E2270F529F00F65F26 /* Storyboards */,
 				049B9925270DF51300400C09 /* Assets.xcassets */,
@@ -170,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				04EC05E4270F69B900F65F26 /* UIColor+Hex.swift */,
+				04F8549F271349FF0080A193 /* Realm+migration.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -187,8 +196,8 @@
 		04EC05F0270F6C1000F65F26 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				04EC06002711B8F400F65F26 /* DataAccessManager.swift */,
-				04EC06062712897700F65F26 /* RealmDAO.swift */,
+				04F854A3271355F70080A193 /* RealmDAO.swift */,
+				04F854A527135BB70080A193 /* Objects */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -234,6 +243,14 @@
 				04EC060F2712E86B00F65F26 /* TopHeadLinesModel.swift */,
 			);
 			path = ResponseModels;
+			sourceTree = "<group>";
+		};
+		04F854A527135BB70080A193 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				04EC06062712897700F65F26 /* RLMTopHeadArticle.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 		99A3182FC631B6380E05FD28 /* Pods */ = {
@@ -430,16 +447,19 @@
 			files = (
 				04EC05F42711AB1E00F65F26 /* MainViewControllerVM.swift in Sources */,
 				04EC06102712E86B00F65F26 /* TopHeadLinesModel.swift in Sources */,
-				04EC06072712897700F65F26 /* RealmDAO.swift in Sources */,
+				04EC06072712897700F65F26 /* RLMTopHeadArticle.swift in Sources */,
 				04EC05EE270F6BE300F65F26 /* MainViewController.swift in Sources */,
 				04EC06012711B8F400F65F26 /* DataAccessManager.swift in Sources */,
 				04EC060C27128D5100F65F26 /* LogHelper.swift in Sources */,
+				04F854A227134A9B0080A193 /* AppConfig.swift in Sources */,
 				04EC05E5270F69B900F65F26 /* UIColor+Hex.swift in Sources */,
 				04EC05F82711AB5F00F65F26 /* NewsCellVM.swift in Sources */,
+				04F854A0271349FF0080A193 /* Realm+migration.swift in Sources */,
 				04EC05FB2711B14500F65F26 /* BaseTableViewCell.swift in Sources */,
 				04EC05FD2711B1DA00F65F26 /* BaseViewModel.swift in Sources */,
 				049B991D270DF51200400C09 /* AppDelegate.swift in Sources */,
 				04EC05F62711AB4F00F65F26 /* NewsCell.swift in Sources */,
+				04F854A4271355F70080A193 /* RealmDAO.swift in Sources */,
 				04EC06052712896300F65F26 /* ApiService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
