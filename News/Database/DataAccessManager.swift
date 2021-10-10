@@ -6,17 +6,18 @@
 //
 
 import Foundation
+import Moya
 import RxSwift
 import RxCocoa
-import RealmSwift
-import Kingfisher
-import Alamofire
+//import RealmSwift
+//import Kingfisher
 
 class DataAccessManager {
     
     static let shared = DataAccessManager()
+    private let apiProvider = MoyaProvider<ApiService>()
     
-    private(set) var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
 
     let newsUpdated = PublishSubject<[NewsCellModel]>()
     
@@ -33,15 +34,27 @@ class DataAccessManager {
 
 // MARK: - fetch API data
 extension DataAccessManager {
-    
-    func fetchNews() {
-        // TODO: fetch news from API
+    func fetchTopHeadLines() {
+        self.apiProvider.request(.topHeadLines(country: "us")) { [unowned self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let data = try JSONDecoder().decode(TopHeadLinesModel.self, from: response.data)
+                    self.storeTopHeadLines(data: data.articles)
+                } catch {
+                    LogHelper.print(.api, item: "parse response failed")
+                }
+
+            case .failure:
+                LogHelper.print(.api, item: "fetch topHeadLines failed")
+            }
+        }
     }
 }
 
 // MARK: - Realm data control
 extension DataAccessManager {
-    func storeNews() {
+    func storeTopHeadLines(data: [Article]) {
         // TODO: store API news to Realm
     }
     

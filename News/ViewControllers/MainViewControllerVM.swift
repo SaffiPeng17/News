@@ -25,8 +25,7 @@ class MainViewControllerVM: BaseViewModel {
     }
     
     private func getNewsData() {
-        // TODO: 取得news data from dataManager
-        self.dataManager.fetchNews()
+        self.dataManager.fetchTopHeadLines()
     }
 
     private func initBinding() {
