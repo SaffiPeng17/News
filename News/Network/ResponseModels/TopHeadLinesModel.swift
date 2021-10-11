@@ -51,6 +51,17 @@ struct Article: Codable {
         publishedAt = try values.decode(String.self, forKey: .publishedAt)
         content = try values.decodeIfPresent(String.self, forKey: .content) ?? ""
     }
+    
+    init(source: Source, author: String, title: String, description: String, url: String, urlToImage: String, publishedAt: String, content: String) {
+        self.source = source
+        self.author = author
+        self.title = title
+        self.description = description
+        self.url = url
+        self.urlToImage = urlToImage
+        self.publishedAt = publishedAt
+        self.content = content
+    }
 }
 
 struct Source: Codable {
@@ -66,5 +77,10 @@ struct Source: Codable {
 
         id = try values.decodeIfPresent(String.self, forKey: .id) ?? ""
         name = try values.decode(String.self, forKey: .name)
+    }
+    
+    init(id: String, name: String) {
+        self.id = id
+        self.name = name
     }
 }

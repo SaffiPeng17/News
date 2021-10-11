@@ -6,24 +6,32 @@
 //
 
 import UIKit
-import SnapKit
 import RxSwift
+import Kingfisher
 
 class NewsCell: BaseTableViewCell<NewsCellVM> {
 
     private lazy var newsImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 4
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     
     private lazy var lblNewsTitle: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 15)
         label.textAlignment = .left
-        label.lineBreakMode = .byCharWrapping
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         return label
     }()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageView?.image = nil
+        self.lblNewsTitle.text = ""
+    }
     
     override func setupViews() {
         super.setupViews()
@@ -34,13 +42,14 @@ class NewsCell: BaseTableViewCell<NewsCellVM> {
         self.addSubview(self.lblNewsTitle)
         
         self.newsImage.snp.makeConstraints { make in
-            make.leading.equalTo(10)
+            make.leading.equalTo(16)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(24)
+            make.width.height.equalTo(60)
         }
 
         self.lblNewsTitle.snp.makeConstraints { make in
             make.leading.equalTo(newsImage.snp.trailing).offset(12)
+            make.trailing.equalTo(-16)
             make.centerY.equalToSuperview()
             make.height.greaterThanOrEqualTo(14)
         }
@@ -49,7 +58,13 @@ class NewsCell: BaseTableViewCell<NewsCellVM> {
     override func bindViewModel() {
         super.bindViewModel()
         
-        self.viewModel.image.distinctUntilChanged().bind(to: self.newsImage.rx.image).disposed(by: disposeBag)
-        self.viewModel.title.distinctUntilChanged().bind(to: self.lblNewsTitle.rx.text).disposed(by: disposeBag)
+        self.viewModel.title.bind(to: self.lblNewsTitle.rx.text).disposed(by: disposeBag)
+        self.viewModel.imageURL.subscribe(onNext: { [weak self] imageURL in
+            guard !imageURL.isEmpty, let url = URL(string: imageURL) else {
+                return
+            }
+            let resource = ImageResource(downloadURL: url, cacheKey: imageURL)
+            self?.newsImage.kf.setImage(with: resource, placeholder: UIImage(named: "news"))
+        }).disposed(by: disposeBag)
     }
 }

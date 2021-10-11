@@ -17,21 +17,33 @@ class DataAccessManager {
     static let shared = DataAccessManager()
 
     private let realmDAO = RealmDAO()
+    private var topHeadArticlesToken: NotificationToken?
+
     private let apiProvider = MoyaProvider<ApiService>()
     private let downloadImageQueue = DispatchQueue.global(qos: .background)
     
     private var disposeBag = DisposeBag()
 
-    let newsUpdated = PublishRelay<[Article]>()
+    let articlesUpdated = PublishRelay<[Article]>()
     
     var newsData = [Article]()
     
     private init() {
-        
+        self.activeRealmToken()
+    }
+    
+    func activeRealmToken() {
+        guard let result = self.realmDAO.read(type: RLMTopHeadArticle.self) else {
+            return
+        }
+        self.topHeadArticlesToken = result.observe { _ in
+            let topHeadArticles = Array(result)
+            self.parseTopHeadArticle(topHeadArticles)
+        }
     }
 
-    func release() {
-        self.disposeBag = DisposeBag()
+    deinit {
+        self.topHeadArticlesToken?.invalidate()
     }
 }
 
@@ -56,11 +68,12 @@ extension DataAccessManager {
     
     private func dataHandler(articles: [Article]) {
         self.storeArticles(articles)
-        self.downloadImages(imageURLs: articles.compactMap { $0.urlToImage })
+        // preload article images
+        self.downloadImages(by: articles.compactMap { $0.urlToImage })
     }
 }
 
-// MARK: - PRIVATE methods
+// MARK: - Realm controls
 private extension DataAccessManager {
     // store API data to Realm
     func storeArticles(_ articles: [Article]) {
@@ -71,8 +84,25 @@ private extension DataAccessManager {
         self.realmDAO.update(rlmArticles)
     }
     
-    // download images in articles
-    private func downloadImages(imageURLs: [String]) {
+    func parseTopHeadArticle(_ rlmObject: [RLMTopHeadArticle]) {
+        let articles = rlmObject.map { object -> Article in
+            let source = Source(id: object.sourceID, name: object.sourceName)
+            return Article(source: source,
+                           author: object.author,
+                           title: object.title,
+                           description: object.desc,
+                           url: object.url,
+                           urlToImage: object.urlToImage,
+                           publishedAt: object.publishedAt,
+                           content: object.content)
+        }
+        self.articlesUpdated.accept(articles)
+    }
+}
+
+// MARK: - download image
+private extension DataAccessManager {
+    func downloadImages(by imageURLs: [String]) {
         downloadImageQueue.async {
             imageURLs.forEach { urlString in
                 self.downloadImage(urlString: urlString, completionHandler: nil)
@@ -80,12 +110,10 @@ private extension DataAccessManager {
         }
     }
 
-    // image download
-    private func downloadImage(urlString: String, progressBlock: DownloadProgressBlock? = nil, completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)?) {
+    func downloadImage(urlString: String, progressBlock: DownloadProgressBlock? = nil, completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)?) {
         guard let url = URL(string: urlString) else {
             return
         }
-        LogHelper.print(.download, item: "image from: ", urlString)
         let resource = ImageResource(downloadURL: url)
         KingfisherManager.shared.retrieveImage(with: resource, options: nil, progressBlock: progressBlock, completionHandler: completionHandler)
     }

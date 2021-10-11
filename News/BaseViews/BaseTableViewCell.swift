@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import RxSwift
 
 class BaseTableViewCell<T: BaseViewModel>: UITableViewCell, ImplementViewModelProtocol {

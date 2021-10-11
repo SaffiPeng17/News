@@ -18,8 +18,8 @@ class NewsCellVM: BaseViewModel, CellViewModelProtocol {
     
     var cellIdentifier: String = "NewsCell"
     
-    let image: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
     let title: BehaviorRelay<String> = BehaviorRelay(value: "")
+    let imageURL: BehaviorRelay<String> = BehaviorRelay(value: "")
     
     private(set) var article: Article?
 
@@ -30,7 +30,7 @@ class NewsCellVM: BaseViewModel, CellViewModelProtocol {
     }
     
     func updateContent(with model: Article) {
-//        self.image.accept(model.image)
         self.title.accept(model.title)
+        self.imageURL.accept(model.urlToImage)
     }
 }

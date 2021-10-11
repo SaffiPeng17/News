@@ -26,10 +26,38 @@ class MainViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        self.title = "News"
+
+        self.title = "Exam"
         self.setupTableView()
         self.registerCells()
+        self.initBinding()
+    }
+    
+    private func setupNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(hex: 0x3C3391)
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+
+    private func setupTableView() {
+        self.tableView.showsVerticalScrollIndicator = false
+        self.tableView.showsHorizontalScrollIndicator = false
+        self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    }
+    
+    private func registerCells() {
+        self.tableView.register(NewsCell.self, forCellReuseIdentifier: "NewsCell")
+    }
+    
+    private func initBinding() {
+        self.viewModel.reloadTable.subscribe(onNext: { [weak self] in
+            self?.tableView.reloadData()
+        }).disposed(by: self.disposeBag)
     }
 }
 
@@ -45,31 +73,13 @@ extension MainViewController {
         }
 
         let cell = tableView.dequeueReusableCell(withIdentifier: vm.cellIdentifier, for: indexPath)
-        if let mCell = cell as? ImplementViewModelProtocol {
-            mCell.setupViewModel(viewModel: vm)
+        if let myCell = cell as? ImplementViewModelProtocol {
+            myCell.setupViewModel(viewModel: vm)
         }
         return cell
     }
-}
-
-private extension MainViewController {
-
-    func setupTableView() {
-        self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-    }
     
-    func registerCells() {
-        self.tableView.register(NewsCell.self, forCellReuseIdentifier: "NewsCell")
-    }
-    
-    func setupNavigationBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(hex: 0x3C3391)
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
     }
 }

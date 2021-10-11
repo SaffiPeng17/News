@@ -10,7 +10,7 @@ import RealmSwift
 
 class RLMTopHeadArticle: Object {
     @objc dynamic var sourceID = ""
-    @objc dynamic var source = ""
+    @objc dynamic var sourceName = ""
     @objc dynamic var author = ""
     @objc dynamic var title = ""
     @objc dynamic var desc = "" // description
@@ -30,7 +30,7 @@ class RLMTopHeadArticle: Object {
     convenience init(with article: Article) {
         self.init()
         self.sourceID = article.source.id
-        self.source = article.source.name
+        self.sourceName = article.source.name
         self.author = article.author
         self.title = article.title
         self.desc = article.description

@@ -13,32 +13,35 @@ class MainViewControllerVM: BaseViewModel {
 
     var disposeBag = DisposeBag()
     
-    let reloadCell = PublishRelay<Void>()
+    let reloadTable = PublishRelay<Void>()
     
     let dataManager = DataAccessManager.shared
     var newsCellVMs = [NewsCellVM]()
 
     override init() {
         super.init()
-        self.getNewsData()
+        self.getTopHeadLines()
         self.initBinding()
     }
     
-    private func getNewsData() {
+    private func getTopHeadLines() {
         self.dataManager.fetchTopHeadLines()
     }
 
     private func initBinding() {
-        // TODO: 訂閱dataManager資料
-        self.dataManager.newsUpdated.subscribe { models in
-            self.reloadCell.accept(())
-        }.disposed(by: self.disposeBag)
-
+        self.dataManager.articlesUpdated.subscribe(onNext: { [unowned self] articles in
+            self.updateNewsCells(with: articles)
+            self.reloadTable.accept(())
+        }).disposed(by: self.disposeBag)
+    }
+    
+    private func updateNewsCells(with articles: [Article]) {
+        self.newsCellVMs = articles.map { NewsCellVM(with: $0) }
     }
 }
 
+// MARK: - tableView dataSource
 extension MainViewControllerVM {
-     
     func numberOfRows() -> Int {
         return self.newsCellVMs.count
     }
